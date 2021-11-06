@@ -31,6 +31,24 @@ public class CarreraCaballo {
             threads[i] = thread;
             thread.start();
         }
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        for (Thread thread : threads) {
+            thread.interrupt();
+        }
+
+        try {
+            for (Thread thread : threads) {
+                thread.join();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }
