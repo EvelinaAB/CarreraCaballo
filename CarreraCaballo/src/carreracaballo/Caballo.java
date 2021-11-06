@@ -20,29 +20,33 @@ public class Caballo implements Runnable {
 
     @Override
     public void run() {
+
         try {
+            while (!Thread.interrupted()) {
 
-//            while (!Thread.interrupted()) {
-            while (contador < 100) {
-//                long initialTime = System.currentTimeMillis();
+                while (contador < 100) {
+                    long initialTime = System.currentTimeMillis();
 
-                Thread.sleep((int) (Math.random() * 41 + 10));
+                    Thread.sleep((int) (Math.random() * 41 + 10));
 
-                contador++;
+                    contador++;
+
+                    if (contador == 100) {
+                        System.out.println("Soy " + this.nombre + " he terminado");
+                    }
+
+                }
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
 
             }
-//                System.out.println("Soy " + this.nombre + " he recorrido " + contador + " m" +System.currentTime());
 
-//            try {
-//                Thread.sleep(100);
-//            } catch (InterruptedException e) {
-//                Thread.currentThread().interrupt();
-//            }
-
-//            }
         } catch (InterruptedException e) {
             System.out.println("No he podido terminar");
         }
     }
-
 }
