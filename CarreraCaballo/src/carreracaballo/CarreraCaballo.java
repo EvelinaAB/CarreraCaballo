@@ -17,6 +17,20 @@ public class CarreraCaballo {
         entradaTeclado = entradaEscaner.nextInt(); //Invocamos un método sobre un objeto Scanner
         Lock lock = new ReentrantLock();
         int length = entradaTeclado;
+
+        Caballo[] caballos = new Caballo[length];
+
+        for (int i = 0; i < length; i++) {
+            Caballo c = new Caballo("Caballo " + i);
+            caballos[i] = c;
+        }
+
+        Thread[] threads = new Thread[length];
+        for (int i = 0; i < length; i++) {
+            Thread thread = new Thread(caballos[i]);
+            threads[i] = thread;
+            thread.start();
+        }
     }
 
 }
