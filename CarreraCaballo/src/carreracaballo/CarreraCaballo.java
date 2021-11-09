@@ -46,55 +46,85 @@ public class CarreraCaballo {
                 300, 100);
         ventana.setVisible(
                 true);
+        ventana.setAlwaysOnTop(true);
+        ventana.setLocationRelativeTo(null);
+     
+    
 
-        botón.addKeyListener(new KeyListener() {
+    botón.addKeyListener ( 
+        new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent d) {
+        public void keyTyped
+        (KeyEvent d
+        
+        
+        ) {
 
             }
 
             @Override
-            public void keyPressed(KeyEvent d) {
+        public void keyPressed
+        (KeyEvent d
+        
+            ) {
                 if (d.getKeyCode() == KeyEvent.VK_ENTER) {
 
-                    Thread[] threads = new Thread[length];
-                    for (int i = 0;
-                            i < length;
-                            i++) {
-                        Thread thread = new Thread(caballos[i]);
-                        threads[i] = thread;
-                        thread.start();
-                    }
-
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    //Tell the players to stop
-                    for (Thread thread : threads) {
-                        thread.interrupt();
-                    }
-
-                    //Don't progress main thread until all players have finished
-                    try {
-                        for (Thread thread : threads) {
-                            thread.join();
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
+                Thread[] threads = new Thread[length];
+                for (int i = 0;
+                        i < length;
+                        i++) {
+                    Thread thread = new Thread(caballos[i]);
+                    threads[i] = thread;
+                    thread.start();
                 }
-                System.exit(0);
+
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                for (Thread thread : threads) {
+                    thread.interrupt();
+                }
+
+                try {
+                    for (Thread thread : threads) {
+                        thread.join();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+//                stopwatch1.stop();
+
+//        System.out.println("Elapsed time in milliseconds: "
+//                + stopwatch1.getElapsedMilliseconds());
+//
+//        System.out.println("Elapsed time in seconds: "
+//                + stopwatch1.getElapsedSeconds());
+//
+//        System.out.println("Elapsed time in minutes: "
+//                + stopwatch1.getElapsedMinutes());
+//
+//        System.out.println("Elapsed time in hours: "
+//                + stopwatch1.getElapsedHours());
+    
+            System.exit(0);
+        }
+
+        @Override
+        public void keyReleased
+        (KeyEvent e
+        
+        
+    
+    ) {
+
             }
 
-            @Override
-            public void keyReleased(KeyEvent e
-            ) {
-
-            }
-
-        });
+        }
+);
     }
 }
