@@ -1,21 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package carreracaballo;
 
 /**
  *
  * @author ewelina
  */
-public class Caballo implements Runnable {
+public class Caballo implements Runnable, Comparable<Caballo> {
 
-    String nombre;
-    int contador;
+    private String nombre;
+    private int contador;
+    private long tiempoRecorrido;
 
-    public Caballo(String nombre) {
+    public Caballo(String nombre, long tiempoR) {
         this.nombre = nombre;
+        this.tiempoRecorrido = tiempoR;
     }
 
     @Override
@@ -35,7 +32,9 @@ public class Caballo implements Runnable {
                 if (contador == 100) {
                     reloj.stop();
 
-                    System.out.println("Soy " + this.nombre + "  he terminado y he tardado  " + reloj.tiempoTranscurrido() + " ms");/*+ (System.currentTimeMillis() - initialTime) + " ms"*/
+                    this.tiempoRecorrido = reloj.tiempoTranscurrido();
+                    System.out.println("Soy " + this.nombre + "  he terminado y he tardado  " + this.tiempoRecorrido + " ms");
+
                 }
 
             }
@@ -45,4 +44,31 @@ public class Caballo implements Runnable {
 
         }
     }
+
+    @Override
+    public String toString() {
+
+        return   nombre + " " + tiempoRecorrido + " ms";
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public long getTiempoRecorrido() {
+        return tiempoRecorrido;
+    }
+
+    @Override
+    public int compareTo(Caballo o) {
+        if (this.tiempoRecorrido > o.tiempoRecorrido) {
+            return 1;
+        }
+        if (this.tiempoRecorrido < o.tiempoRecorrido) {
+            return -1;
+
+        }
+        return 0;
+    }
+
 }
